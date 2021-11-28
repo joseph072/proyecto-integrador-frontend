@@ -1,0 +1,66 @@
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Producto} from "../producto";
+import {ProductosService} from "../productos.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+
+@Component({
+  selector: 'app-agregar-producto',
+  templateUrl: './agregar-producto.component.html',
+  styleUrls: ['./agregar-producto.component.css']
+})
+export class AgregarProductoComponent implements OnInit {
+  @ViewChild("foto", {
+    read: ElementRef
+  }) foto: ElementRef;
+
+  public user = JSON.parse(localStorage.getItem('user'));
+
+
+  constructor(private productosService: ProductosService, private snackBar: MatSnackBar) {
+  }
+
+  productoModel = new Producto(this.user.nombre,"", "");
+
+  public cargando = false;
+
+  async guardar() {
+    if (!this.productoModel.nombre) {
+      return alert("Escribe un nombre");
+    }
+    if (!this.productoModel.descripcion) {
+      return alert("Escribe la descripción");
+    }
+    if (!this.productoModel.precio) {
+      return alert("Escribe el precio");
+    }
+    let archivos = this.foto.nativeElement.files;
+    if (!archivos.length) {
+      return alert("Selecciona al menos una foto");
+    }
+    this.cargando = true;
+    // Guardamos producto
+    const idProductoGuardado = await this.productosService.agregarProducto(this.productoModel);
+    // Y luego las fotos
+    const fd = new FormData();
+    for (let x = 0; x < archivos.length; x++) {
+      fd.append(`foto_${x}`, archivos[x])
+    }
+    fd.append("idProducto", idProductoGuardado);
+    const respuesta = await this.productosService.agregarFotosDeProducto(fd);
+    this.snackBar.open("Producto guardado", "", {
+      duration: 1500,
+      horizontalPosition: "start",
+      verticalPosition: "top",
+    });
+
+    this.cargando = false;
+    this.productoModel = new Producto("", "");
+    this.foto.nativeElement.value = "";
+  }
+
+  ngOnInit(): void {
+
+
+  }
+
+}

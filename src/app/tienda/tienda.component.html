@@ -1,0 +1,11 @@
+
+
+
+ <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Ingrese el producto a buscar...</mat-label>
+      <input matInput maxlength="256" (keyup)="buscar(txtTermino.value)" #txtTermino >
+    </mat-form-field>
+  </form>
+ 
+ <app-tarjeta-producto  class="col-2" [producto]="producto" *ngFor="let producto of productos  | filtro: textoBuscar"></app-tarjeta-producto>

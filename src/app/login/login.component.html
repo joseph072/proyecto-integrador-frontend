@@ -1,0 +1,28 @@
+<mat-card>
+  <div class="login">
+
+    <h1>Ingresar</h1>
+    <p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="usuarioModel.usuario"
+               type="text"
+               placeholder="Usuario">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="usuarioModel.clave"
+                  placeholder="Clave">
+      </mat-form-field>
+    </p>    
+    <p>
+      <app-loading-button [cargando]="cargando" texto="Ingresar" (click)="login()"></app-loading-button>
+    </p>
+
+
+    <p>
+        <a routerLink="/register"  color="primary" style="margin-left: 10px">Aun no tiene un usuario? Registrarse aquí</a>
+    </p>
+  </div>
+
+</mat-card>

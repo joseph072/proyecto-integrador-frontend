@@ -1,0 +1,11 @@
+mat-card {
+    position: center;
+    text-align: center;
+    background: #3f51b5;
+}
+
+
+.login {
+    background: #fff;
+    padding: 30px;
+}

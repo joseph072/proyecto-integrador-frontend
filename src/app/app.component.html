@@ -1,0 +1,89 @@
+<div class="contenedor-padre">
+  <mat-toolbar class="barra" color="primary">
+    <mat-toolbar-row>
+      <button (click)="cajon.toggle()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>
+        Proyecto Integración&nbsp;|&nbsp; 
+        BIENVENIDO {{userTipo | uppercase}}   {{user}}
+      </span>
+      <span class="example-fill-remaining-space"></span>
+
+    
+
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-sidenav-container class="contenido">
+    <mat-sidenav style="min-width: 300px;" #cajon opened mode="side">
+      <mat-nav-list>
+
+        <p style="margin-left: 4px;">Accesos</p>
+        <a mat-list-item routerLink="/login">
+          <mat-icon color="primary">lock</mat-icon>
+          Ingresar
+        </a>
+        <a mat-list-item routerLink="/register">
+          <mat-icon color="primary">add</mat-icon>
+          Registrar
+        </a>
+
+        <mat-divider></mat-divider>
+
+         
+
+        <p style="margin-left: 4px;">Cliente</p>
+        <a mat-list-item routerLink="/tienda">
+          <mat-icon color="primary">store</mat-icon>
+          Ver tienda
+        </a>
+      
+        <mat-divider></mat-divider>
+
+        
+        <div *ngIf="userTipo == 'vendedor'">
+
+          <p style="margin-left: 4px;">Vendedor</p>
+          <a mat-list-item routerLink="/productos">
+            <mat-icon color="primary">list_alt</mat-icon>
+            Productos
+          </a>
+         
+
+          <a mat-list-item routerLink="/ventas">
+            <mat-icon color="primary">local_shipping</mat-icon>
+            Ventas
+          </a>
+          
+  
+          </div>
+
+
+        <div *ngIf="userTipo == 'cliente'">
+          <a mat-list-item routerLink="/ventas-cliente">
+            <mat-icon color="primary">local_shipping</mat-icon>
+            Compras Cliente
+          </a>
+        </div>
+         
+          
+          <mat-divider></mat-divider>
+
+          <a mat-list-item (click)="logout()">
+            <mat-icon color="primary">logout</mat-icon>
+            Cerrar sesion
+          </a>
+          
+          <mat-divider></mat-divider>
+
+
+
+ 
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="padding-10">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

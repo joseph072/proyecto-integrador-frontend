@@ -1,0 +1,66 @@
+<mat-card>
+
+  <div class="login">
+
+    <h1>Registrar usuario</h1>
+    <p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="usuarioModel.nombre"
+               type="text"
+               placeholder="Nombre">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="usuarioModel.direccion"
+                  placeholder="Direccion">
+      </mat-form-field>
+    </p>  
+    <p>
+        <mat-form-field>
+          <input matInput [(ngModel)]="usuarioModel.documento"
+                 type="text"
+                 placeholder="Documento">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput [(ngModel)]="usuarioModel.telefono"
+                    placeholder="Telefono">
+        </mat-form-field>
+      </p>  
+      <p>
+        <mat-form-field>
+          <input matInput [(ngModel)]="usuarioModel.usuario"
+                 type="text"
+                 placeholder="Usuario">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput [(ngModel)]="usuarioModel.clave"
+                    placeholder="Clave">
+        </mat-form-field>
+      </p>  
+      
+        <mat-form-field appearance="fill">
+        <mat-label>Seleccione un rol </mat-label>
+        <mat-select [(ngModel)]="usuarioModel.rol">
+            <mat-option value="cliente">Cliente</mat-option>
+            <mat-option value="vendedor">Vendedor</mat-option>
+        </mat-select>
+        </mat-form-field>
+
+
+    <p>
+      <app-loading-button [cargando]="cargando" texto="Registrar" (click)="guardar()"></app-loading-button>
+    </p>
+
+
+    <p>
+        <a routerLink="/login"  color="primary" style="margin-left: 10px">Ya tiene una cuenta? Ingrese aquí</a>
+    </p>
+
+  </div>
+
+</mat-card>
